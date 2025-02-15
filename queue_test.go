@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func BenchmarkNewQueueCreation(b *testing.B) {
+func BenchmarkQueueCreation(b *testing.B) {
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		q := NewQueue[int]()
@@ -16,7 +16,7 @@ func BenchmarkNewQueueCreation(b *testing.B) {
 	}
 }
 
-func BenchmarkNewQueuePushBack(b *testing.B) {
+func BenchmarkQueuePushBack(b *testing.B) {
 	b.ReportAllocs()
 	q := NewQueue[int]()
 	for i := 0; i < b.N; i++ {
@@ -24,7 +24,7 @@ func BenchmarkNewQueuePushBack(b *testing.B) {
 	}
 }
 
-func BenchmarkNewQueuePushFront(b *testing.B) {
+func BenchmarkQueuePushFront(b *testing.B) {
 	b.ReportAllocs()
 	q := NewQueue[int]()
 	for i := 0; i < b.N; i++ {
@@ -32,7 +32,7 @@ func BenchmarkNewQueuePushFront(b *testing.B) {
 	}
 }
 
-func BenchmarkNewQueueFromSlice(b *testing.B) {
+func BenchmarkQueueFromSlice(b *testing.B) {
 	arr := make([]int, b.N)
 	for i:=0; i<b.N; i++ {
 		arr[i]=i
@@ -42,7 +42,7 @@ func BenchmarkNewQueueFromSlice(b *testing.B) {
 	_ = FromSlice(arr)
 }
 
-func BenchmarkNewQueuePopBack(b *testing.B) {
+func BenchmarkQueuePopBack(b *testing.B) {
 	q := NewQueue[int]()
 	for i := 0; i < b.N; i++ {
 		q.PushBack(i)
@@ -54,7 +54,7 @@ func BenchmarkNewQueuePopBack(b *testing.B) {
 	}
 }
 
-func BenchmarkNewQueuePopFront(b *testing.B) {
+func BenchmarkQueuePopFront(b *testing.B) {
 	q := NewQueue[int]()
 	for i := 0; i < b.N; i++ {
 		q.PushBack(i)
@@ -66,7 +66,7 @@ func BenchmarkNewQueuePopFront(b *testing.B) {
 	}
 }
 
-func BenchmarkNewQueueFront(b *testing.B) {
+func BenchmarkQueueFront(b *testing.B) {
 	q := NewQueue[int]()
 	q.PushBack(42)
 	b.ResetTimer()
@@ -76,7 +76,7 @@ func BenchmarkNewQueueFront(b *testing.B) {
 	}
 }
 
-func BenchmarkNewQueueBack(b *testing.B) {
+func BenchmarkQueueBack(b *testing.B) {
 	q := NewQueue[int]()
 	q.PushBack(42)
 	b.ResetTimer()
@@ -86,7 +86,7 @@ func BenchmarkNewQueueBack(b *testing.B) {
 	}
 }
 
-func BenchmarkNewQueueIsEmpty(b *testing.B) {
+func BenchmarkQueueIsEmpty(b *testing.B) {
 	q := NewQueue[int]()
 	b.ResetTimer()
 	b.ReportAllocs()
@@ -95,7 +95,7 @@ func BenchmarkNewQueueIsEmpty(b *testing.B) {
 	}
 }
 
-func BenchmarkNewQueueMixedOperations(b *testing.B) {
+func BenchmarkQueueMixedOperations(b *testing.B) {
 	b.ReportAllocs()
 	q := NewQueue[int]()
 	for i := 0; i < b.N; i++ {
@@ -339,17 +339,18 @@ func TestQueueWithNilPointers(t *testing.T) {
 
 func TestLargeQueueOperations(t *testing.T) {
 	q := NewQueue[int]()
-	for i := 0; i < 100000; i++ {
+	n := 100000
+	for i := 0; i < n; i++ {
 		q.PushBack(i)
 	}
 
 	// Ensure the queue size is correct
-	if q.Len() != 100000 {
-		t.Errorf("Expected queue size 100000, got %d", q.Len())
+	if q.Len() != n {
+		t.Errorf("Expected queue size %d, got %d", n, q.Len())
 	}
 
 	// Pop all elements and check if it's in order
-	for i := 0; i < 100000; i++ {
+	for i := 0; i < n; i++ {
 		if val, ok := q.PopFront(); !ok || val != i {
 			t.Errorf("Expected popped value %d, got %v", i, val)
 		}
