@@ -114,6 +114,13 @@ BenchmarkQueueWithSlices-6              10000000                27.46 ns/op     
 PASS
 ok      bfq     66.710s
 ```
+---
+
+## Let’s Push the Boundaries Together
+
+If not us, then who will push this further? Join me in making `BFQ` even better by contributing to the project! Whether it's adding features, improving performance, or fixing bugs, every contribution counts. I’d greatly appreciate any pull requests and suggestions from the community to help make this project faster and more efficient.
+
+---
 
 ## License
 
