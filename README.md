@@ -1,3 +1,4 @@
+[![Go Reference](https://pkg.go.dev/badge/github.com/phtea/bfq.svg)](https://pkg.go.dev/github.com/phtea/bfq)
 # BFQ - Blazingly Fast Queue
 
 `BFQ` (Blazingly Fast Queue) is a high-performance, **non-thread-safe** queue implementation in Go. It leverages optimized memory management and efficient resizing to provide fast operations for typical use cases. While it isn't safe for concurrent use, it shines in single-threaded environments where performance is critical.
